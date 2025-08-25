@@ -46,6 +46,15 @@ async function run() {
       res.send(result);
     })
 
+    app.put("/myplants/:id", async(req, res)=>{
+      const id = req.params.id;
+      const data = req.body;
+      const filter = {_id : new ObjectId(id)}
+      const update = {$set : data};
+      const result = await collection.updateOne(filter, update);
+      res.send(result)
+    })
+
     app.delete("/myplants/:id", async(req, res)=>{
       const id = req.params.id;
       const result = await collection.deleteOne({
