@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require("express");
 const cors = require("cors");
@@ -25,8 +26,8 @@ async function run() {
     const database = client.db("Alldata");
     const collection = database.collection("users");
     
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    // await client.db("admin").command({ ping: 1 });
+    // console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
     app.post("/myplants", async(req, res)=>{
       const data = req.body;
@@ -70,8 +71,10 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res)=>{
-res.send("Your server is completely ready to run.")
+res.json({ message: "Your server is completely ready to run." });
 });
+
+
 
 app.listen(port, () => {
  console.log(`Example app listening on port ${port}`)
